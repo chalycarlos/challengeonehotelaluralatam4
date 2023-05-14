@@ -147,7 +147,7 @@ public class ReservasView extends JFrame {
 			
 			
 			panel_1 = new JPanel();
-			panel_1.setBounds(427, 0, 483, 558);
+			panel_1.setBounds(429, 0, 481, 521);
 			panel_1.setBackground(new Color(238, 232, 170));
 			container.add(panel_1);
 			panel_1.setLayout(null);

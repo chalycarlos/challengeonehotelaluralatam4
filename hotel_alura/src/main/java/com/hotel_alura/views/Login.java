@@ -10,34 +10,69 @@ public class Login extends JFrame {
 
 	private JLabel userLabel;
 	private JLabel passwordLabel;
+	private JLabel TituloLabel;
 	private JTextField userText;
 	private JPasswordField passwordText;
 	private JButton loginButton;
+	private JPanel panel;
 	
 	public Login() {
 		super("Inicio de sesión");
 
 		// Configurar la ventana
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setSize(300, 150);
-		setLayout(new GridLayout(3, 2));
+		setBounds(100,100,450, 357);
+		setResizable(false);
+		Container container = getContentPane();
+		getContentPane().setLayout(null);
+		
+		
+		
 
 		// Crear componentes
+		//LABELS
+		TituloLabel = new JLabel("INICIAR SESION");
+		TituloLabel.setHorizontalAlignment(SwingConstants.LEFT);
+		TituloLabel.setForeground(new Color(100, 149, 237));
+		TituloLabel.setFont(new Font("Tahoma", Font.BOLD, 16));
+		TituloLabel.setBounds(10, 11, 152, 26);
+		container.add(TituloLabel);
+		
 		userLabel = new JLabel("Usuario:");
+		userLabel.setBounds(10, 54, 136, 36);
+		userLabel.setHorizontalAlignment(SwingConstants.LEFT);
+		userLabel.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		
 		passwordLabel = new JLabel("Contraseña:");
+		passwordLabel.setBounds(10, 154, 222, 36);
+		passwordLabel.setHorizontalAlignment(SwingConstants.LEFT);
+		passwordLabel.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		
+		//TEXT
 		userText = new JTextField();
-		passwordText = new JPasswordField();
-		loginButton = new JButton("Iniciar sesión");
+		userText.setBounds(9, 101, 234, 42);
+		loginButton = new JButton("INICIAR");
+		loginButton.setBounds(10, 271, 100, 36);
 
 		// Agregar componentes a la ventana
-		add(userLabel);
-		add(userText);
-		add(passwordLabel);
-		add(passwordText);
-		add(new JLabel());
-		add(loginButton);
+		container.add(userLabel);
+		container.add(passwordLabel);
+		container.add(userText);
+		container.add(loginButton);
+		
+		panel= new JPanel();
+		panel.setBounds(253, 0, 181, 318);
+		panel.setBackground(new Color(135, 206, 235));
+		container.add(panel);
+		panel.setLayout(null);
+		
+		passwordText = new JPasswordField();
+		passwordText.setBounds(10, 201, 233, 36);
+		container.add(passwordText);
+		
+		
 
-		// Agregar ActionListener al botón de inicio de sesión
+		// Agregar ActionListener al botón de inicio de sesión(INICIAR)
 		loginButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				String usuario = userText.getText();
@@ -54,7 +89,21 @@ public class Login extends JFrame {
 
 		// Mostrar la ventana
 		setVisible(true);
+		
+		
 
 	}
 
+	public String getNombre() {
+		return userText.getText();
+		
+	}
+
+	public String getContraseña() {
+		// TODO Auto-generated method stub
+		return new String(passwordText.getPassword());
+	}	
+
+	
+		
 }

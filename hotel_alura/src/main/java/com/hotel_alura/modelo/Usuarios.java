@@ -8,14 +8,31 @@ import java.sql.SQLException;
 import com.hotel_alura.coneccion.ConeccionBD;
 
 public class Usuarios {
-	
+	private Integer Id;
 	private String nombre;
 	private String contraseña;
 	
-	public Usuarios(String nombre, String contraseña) {
+	public Usuarios() {
+		this.Id= Id;
 		this.nombre= nombre;
 		this.contraseña= contraseña;
 		
+	}
+	
+	public Usuarios(String nombre, String contraseña) {
+		super();
+		this.nombre= nombre;
+		this.contraseña= contraseña;
+	}
+
+	
+
+	public Integer getId() {
+		return Id;
+	}
+
+	public void setId(Integer id) {
+		Id = id;
 	}
 
 	public String getNombre() {
@@ -64,5 +81,7 @@ public class Usuarios {
 			}
 		}
 	}
+
+	
 
 }

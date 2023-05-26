@@ -1,4 +1,4 @@
-package dao;
+package com.hotel_alura.DAO;
 
 import java.sql.Connection;
 import java.sql.Date;
@@ -151,3 +151,4 @@ public class HuespedesDAO {
 
 	
 }
+

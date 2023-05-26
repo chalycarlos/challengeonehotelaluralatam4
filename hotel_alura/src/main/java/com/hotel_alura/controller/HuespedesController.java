@@ -13,8 +13,7 @@ import java.util.Map;
 
 import com.hotel_alura.coneccion.ConeccionBD;
 import com.hotel_alura.modelo.Huespedes;
-
-import dao.HuespedesDAO;
+import com.hotel_alura.DAO.*;
 
 public class HuespedesController {
 	

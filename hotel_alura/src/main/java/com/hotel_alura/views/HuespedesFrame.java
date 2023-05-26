@@ -9,10 +9,11 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 
 import com.hotel_alura.controller.HuespedesController;
+import com.hotel_alura.controller.ReservasController;
 import com.hotel_alura.modelo.Huespedes;
 import com.toedter.calendar.JDateChooser;
 
-import dao.HuespedesDAO;
+import com.hotel_alura.DAO.HuespedesDAO;
 
 import java.awt.Font;
 import java.awt.Color;
@@ -54,7 +55,8 @@ public class HuespedesFrame extends JFrame {
 	private JButton btnAgregar, btnModificar, btnLimpiar, btnEliminar, btnReporte;
 	private JTable tabla;
 	private DefaultTableModel modelo;
-	private HuespedesController huespedesController;	
+	private HuespedesController huespedesController;
+	private ReservasController reservasController;
 
 
 
@@ -64,6 +66,8 @@ public class HuespedesFrame extends JFrame {
 		getContentPane().setBackground(new Color(211, 211, 211));
 
 		this.huespedesController = new HuespedesController();
+		//this.reservasController = new ReservasController();
+		
 		Container container = getContentPane();
 		getContentPane().setLayout(null);
 

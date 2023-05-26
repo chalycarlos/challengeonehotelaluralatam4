@@ -46,10 +46,11 @@ public class ReservasView extends JFrame {
 	int xMouse, yMouse;
 	private JLabel lblTitulo,lblfechaEntrada,lblfechaSalida,lblPrecio ;
 	private JLabel lblExit,lblAtras,lblSiguiente;
-	private JPanel panel_1,btnexit;
+	private JPanel panel_1;
 	private JButton btnAtras;
 	public static JDateChooser txtFechaSalida;
 	public static JDateChooser txtFechaEntrada;
+	
 	
 	/*public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -80,13 +81,9 @@ public class ReservasView extends JFrame {
 		Container container = getContentPane();
 		getContentPane().setLayout(null);
 		
-		configurarCamposDelFormulario(container);
+		configurarCamposDelFormulario(container);		
 		
-		
-		
-			
 
-		
 		setVisible(true);
 	}
 				
@@ -152,28 +149,14 @@ public class ReservasView extends JFrame {
 			container.add(panel_1);
 			panel_1.setLayout(null);
 			
-			btnexit = new JPanel();
-			btnexit.addMouseListener(new MouseAdapter() {
-				@Override
-				public void mouseClicked(MouseEvent e) {
-					MenuPrincipal principal = new MenuPrincipal();
-					principal.setVisible(true);
-					dispose();
-				}
-				@Override
-				public void mouseEntered(MouseEvent e) {
-					btnexit.setBackground(Color.red);
-					lblExit.setForeground(Color.white);
-				}			
-				@Override
-				public void mouseExited(MouseEvent e) {
-					 btnexit.setBackground(new Color(12, 138, 199));
-					 lblExit.setForeground(Color.white);
-				}
-			});
+			JLabel lblBienvenido = new JLabel("BIENVENIDO");
+			lblBienvenido.setForeground(new Color(0, 0, 255));
+			lblBienvenido.setFont(new Font("Tahoma", Font.BOLD, 20));
+			lblBienvenido.setBounds(160, 11, 140, 30);
+			panel_1.add(lblBienvenido);
 			
 			JPanel header = new JPanel();
-			header.setBounds(0, 0, 910, 36);
+			header.setBounds(0, 0, 430, 36);
 			header.addMouseMotionListener(new MouseMotionAdapter() {
 				@Override
 				public void mouseDragged(MouseEvent e) {
@@ -210,12 +193,6 @@ public class ReservasView extends JFrame {
 					 lblAtras.setForeground(Color.black);
 				}
 			});
-			
-			//BUTTONS
-			btnexit.setLayout(null);
-			btnexit.setBackground(new Color(12, 138, 199));
-			btnexit.setBounds(429, 0, 53, 36);
-			panel_1.add(btnexit);
 			
 			btnAtras.setLayout(null);
 			btnAtras.setBackground(Color.WHITE);
@@ -267,7 +244,7 @@ public class ReservasView extends JFrame {
 			});
 			btnsiguiente.setLayout(null);
 			btnsiguiente.setBackground(SystemColor.textHighlight);
-			btnsiguiente.setBounds(238, 493, 122, 35);
+			btnsiguiente.setBounds(188, 486, 122, 35);
 			container.add(btnsiguiente);
 			btnsiguiente.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 

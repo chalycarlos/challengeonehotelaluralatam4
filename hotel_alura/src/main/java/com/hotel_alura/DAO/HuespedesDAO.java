@@ -7,7 +7,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.HashMap;
+
 import java.util.List;
 import java.util.Map;
 
@@ -23,15 +23,15 @@ public class HuespedesDAO {
 		this.con = con;
 	}
 
-	public void Agregar(Huespedes huesped) {
+	public void Agregar(Huespedes huesped)  {
 
 		try{			
 
 			final PreparedStatement statement;
 			statement = con.prepareStatement(
 					"INSERT INTO huespedes "
-							+ "(Nombre, Apellido, FechaNacimiento,Nacionalidad,Telefono)"
-							+ " VALUES (?, ?, ?,?,?)",
+							+ "(Nombre, Apellido, FechaNacimiento,Nacionalidad,Telefono,IdReservas)"
+							+ " VALUES (?, ?, ?,?,?,?)",
 							Statement.RETURN_GENERATED_KEYS);
 
 			try(statement) {
@@ -41,7 +41,7 @@ public class HuespedesDAO {
 				statement.setDate(3, huesped.getFechaNacimiento());
 				statement.setString(4, huesped.getNacionalidad());
 				statement.setString(5, huesped.getTelefono());
-				//statement.setInt(6,huesped.getIdReserva());
+				statement.setInt(6,huesped.getIdReservas());
 
 				statement.execute();
 
@@ -61,15 +61,12 @@ public class HuespedesDAO {
 
 	}	
 	
-	
-
 	public List<Huespedes> listar() {
-		List<Huespedes> resultado= new ArrayList<>();      
-
+		List<Huespedes> resultado= new ArrayList<>();    
 
 		try {
 			final PreparedStatement statement = con
-					.prepareStatement("SELECT Id, Nombre, Apellido, FechaNacimiento,Nacionalidad,Telefono FROM huespedes");
+					.prepareStatement("SELECT Id, Nombre, Apellido, FechaNacimiento,Nacionalidad,Telefono,IdReservas FROM huespedes");
 
 			try(statement) {
 				statement.execute();
@@ -84,17 +81,17 @@ public class HuespedesDAO {
 								resultSet.getString("Apellido"),
 								resultSet.getDate("FechaNacimiento"),
 								resultSet.getString("Nacionalidad"),
-								resultSet.getString("Telefono")));                    
-
+								resultSet.getString("Telefono"),
+								resultSet.getInt("IdReservas")));			
+								
 					}
 				}
 			}
 
-			
+			return resultado;
 		} catch (SQLException e) {
 			throw new RuntimeException(e);
-		}
-		return resultado;
+		}		
 
 	}
 

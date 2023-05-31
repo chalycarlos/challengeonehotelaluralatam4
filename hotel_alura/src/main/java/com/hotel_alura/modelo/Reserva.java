@@ -10,14 +10,25 @@ public class Reserva {
 	private String formaPago;
 	
 	//Constructor
-	public Reserva(Integer idreservas, Date fechaEntrada, Date fechaSalida, Double precio, String formaPago) {
+	public Reserva(int IdReservas,Date fechaEntrada, Date fechaSalida, Double precio, String formaPago) {
 		super();
-		this.idreservas = idreservas;
+		
 		this.fechaEntrada = fechaEntrada;
 		this.fechaSalida = fechaSalida;
 		this.precio = precio;
 		this.formaPago = formaPago;
 	}
+
+	
+
+	public Reserva(java.util.Date fechaEnt, java.util.Date fechaSali, Double precio, String formaPago) {
+		this.fechaEntrada = (Date) fechaEnt;
+		this.fechaSalida = (Date) fechaSali;
+		this.precio = precio;
+		this.formaPago = formaPago;
+	}
+
+
 
 	public Integer getIdreservas() {
 		return idreservas;

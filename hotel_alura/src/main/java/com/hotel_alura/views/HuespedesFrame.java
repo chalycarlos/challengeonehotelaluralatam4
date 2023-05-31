@@ -5,12 +5,16 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 
 import com.hotel_alura.controller.HuespedesController;
 import com.hotel_alura.controller.ReservasController;
+
+
 import com.hotel_alura.modelo.Huespedes;
+import com.hotel_alura.modelo.Reserva;
 import com.toedter.calendar.JDateChooser;
 
 import com.hotel_alura.DAO.HuespedesDAO;
@@ -52,11 +56,15 @@ public class HuespedesFrame extends JFrame {
 	private JTextField txtFechaNac;
 	private JTextField txtNacionalidad;
 	private JTextField txtTelefono;
-	private JButton btnAgregar, btnModificar, btnLimpiar, btnEliminar, btnReporte;
+	private JButton btnAgregar, btnModificar, btnLimpiar, btnEliminar;
 	private JTable tabla;
 	private DefaultTableModel modelo;
 	private HuespedesController huespedesController;
 	private ReservasController reservasController;
+	
+	
+	
+	private JTextArea reportTextArea;
 
 
 
@@ -67,6 +75,11 @@ public class HuespedesFrame extends JFrame {
 
 		this.huespedesController = new HuespedesController();
 		//this.reservasController = new ReservasController();
+		
+		setTitle("Hotel Alura - Reporte de Huéspedes");
+        setSize(400, 300);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setLocationRelativeTo(null);        
 		
 		Container container = getContentPane();
 		getContentPane().setLayout(null);
@@ -105,15 +118,9 @@ public class HuespedesFrame extends JFrame {
             }
 
 		 });
-		
-		btnReporte.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                abrirReporte();
-            }
-        });
 	}
 	
-
+	
 	private void modificar() {
 		if (tieneFilaElegida()) {
             JOptionPane.showMessageDialog(this, "Por favor, elije un item");
@@ -169,6 +176,10 @@ public class HuespedesFrame extends JFrame {
 		txtFechaNac = new JTextField();
 		txtNacionalidad = new JTextField();
 		txtTelefono = new JTextField();
+		
+		// Crear componente de texto
+        reportTextArea = new JTextArea();
+        reportTextArea.setEditable(false);
 
 		// TODO
 		//var categorias = this.categoriaController.listar();
@@ -199,22 +210,31 @@ public class HuespedesFrame extends JFrame {
 		container.add(txtTelefono);
 		container.add(btnAgregar);
 		container.add(btnLimpiar);	        
-
+		container.add(reportTextArea);
 
 	}
 
 	private void configurarTablaDeContenido(Container container) {
+		 
 		tabla = new JTable();			
+		tabla.setModel(new DefaultTableModel(
+			new Object[][] {
+			},
+			new String[] {
+			}
+		));
 
 
 		modelo = (DefaultTableModel) tabla.getModel();
-		modelo.addColumn("Codigo");
+		modelo.addColumn("Id");
 		modelo.addColumn("nombre");
 		modelo.addColumn("Apellido");
 		modelo.addColumn("Fecha Nacimiento");
 		modelo.addColumn("Nacionalidad");
 		modelo.addColumn("Telefono");
-
+		modelo.addColumn("IdReserva");
+		
+		
 		cargarTabla();
 
 		tabla.setBounds(10, 340, 779, 233);
@@ -223,15 +243,12 @@ public class HuespedesFrame extends JFrame {
 		//BUTTONS			
 		btnModificar = new JButton("Modificar");
 		btnEliminar = new JButton("Eliminar");
-		btnReporte = new JButton("Mostrar");
 		btnModificar.setBounds(10, 609, 80, 20);
 		btnEliminar.setBounds(100, 609, 80, 20);
-		btnReporte.setBounds(190, 609, 80, 20);
 
 		container.add(tabla);			
 		container.add(btnModificar);
 		container.add(btnEliminar);
-		container.add(btnReporte);
 
 		setSize(830, 750);
 		setVisible(true);
@@ -239,7 +256,7 @@ public class HuespedesFrame extends JFrame {
 
 	}
 
-	private void cargarTabla() {			
+	public void cargarTabla() {			
 		var huespedes = this.huespedesController.listar();		
 
 		huespedes.forEach(huesped -> modelo.addRow(
@@ -249,7 +266,8 @@ public class HuespedesFrame extends JFrame {
 						huesped.getApellido(),
 						huesped.getFechaNacimiento(),
 						huesped.getNacionalidad(),
-						huesped.getTelefono()}));
+						huesped.getTelefono(),
+						huesped.getIdReservas()}));
 
 	}
 
@@ -259,7 +277,7 @@ public class HuespedesFrame extends JFrame {
 			return;
 		}
 
-		String telefono;
+		 String telefono;
 
 		try {
 			telefono = txtTelefono.getText();
@@ -269,10 +287,11 @@ public class HuespedesFrame extends JFrame {
 			return;
 		}
 
-		var huesped= new Huespedes(txtNombre.getText(),
-				txtApellido.getText(),Date.valueOf(txtFechaNac.getText()), txtNacionalidad.getText(),telefono);
+		var huespedes= new Huespedes(txtNombre.getText(),
+				txtApellido.getText(),Date.valueOf(txtFechaNac.getText()), txtNacionalidad.getText(),telefono);		
 		
-		this.huespedesController.Agregar(huesped);
+		
+		this.huespedesController.Agregar(huespedes,huespedes.getIdReservas());
 		JOptionPane.showMessageDialog(this, "Registrado con éxito!");
 
 		this.limpiarFormulario();
@@ -310,10 +329,6 @@ public class HuespedesFrame extends JFrame {
 	
 	private boolean tieneFilaElegida() {
         return tabla.getSelectedRowCount() == 0 || tabla.getSelectedColumnCount() == 0;
-    }
-	
-	private void abrirReporte() {
-        new ReporteFrame(this);
     }
 	
 }

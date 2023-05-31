@@ -13,6 +13,7 @@ import java.awt.event.MouseMotionAdapter;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
+import javax.swing.ComboBoxModel;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -27,11 +28,18 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 
 import java.sql.Connection;
-
+import java.sql.Date;
+import java.text.SimpleDateFormat;
 
 import com.toedter.calendar.JDateChooser;
 import java.awt.EventQueue;
+
+import com.hotel_alura.controller.ReservasController;
+import com.hotel_alura.modelo.Huespedes;
 import com.toedter.calendar.JCalendar;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import com.hotel_alura.modelo.Reserva;
 
 
 
@@ -48,26 +56,14 @@ public class ReservasView extends JFrame {
 	private JLabel lblExit,lblAtras,lblSiguiente;
 	private JPanel panel_1;
 	private JButton btnAtras;
+	private JButton btnGuardar;
 	public static JDateChooser txtFechaSalida;
 	public static JDateChooser txtFechaEntrada;
-	
-	
-	/*public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					ReservasView frame = new ReservasView();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}*/
+	private JComboBox formaPago;
 
-	/**
-	 * Create the frame.
-	 */
+	private ReservasController reservasController;
+	
+	
 	
 	
 	public ReservasView() {
@@ -81,13 +77,25 @@ public class ReservasView extends JFrame {
 		Container container = getContentPane();
 		getContentPane().setLayout(null);
 		
-		configurarCamposDelFormulario(container);		
-		
+		configurarCamposDelFormulario(container);
+		accionesDelFormulario();
 
 		setVisible(true);
 	}
 				
 		
+		private void accionesDelFormulario() {
+			btnGuardar.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					Guardar();
+					
+				}				
+				
+			});	
+		
+	}
+
+
 		private void configurarCamposDelFormulario(Container container) {
 			//Crear codigo Interfaz
 			
@@ -199,6 +207,15 @@ public class ReservasView extends JFrame {
 			btnAtras.setBounds(0, 0, 53, 36);
 			header.add(btnAtras);
 			
+			btnGuardar = new JButton("Guardar");
+			btnGuardar.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+				}
+			});
+			btnGuardar.setFont(new Font("Tahoma", Font.PLAIN, 12));
+			btnGuardar.setBounds(155, 477, 113, 33);
+			container.add(btnGuardar);
+			
 			JDateChooser txtFechaSalida = new JDateChooser();
 			txtFechaSalida.setBounds(68, 253, 284, 39);
 			txtFechaSalida.setDateFormatString("yyyy-MM-dd");
@@ -211,10 +228,10 @@ public class ReservasView extends JFrame {
 			
 			txtValor = new JTextField();
 			txtValor.setBackground(Color.WHITE);
-			txtValor.setHorizontalAlignment(SwingConstants.CENTER);
+			txtValor.setHorizontalAlignment(SwingConstants.LEFT);
 			txtValor.setForeground(Color.BLACK);
 			txtValor.setBounds(68, 328, 197, 33);
-			txtValor.setEditable(false);
+			//txtValor.setEditable(false);
 			txtValor.setFont(new Font("Dialog", Font.BOLD, 16));
 			txtValor.setBorder(new LineBorder(Color.LIGHT_GRAY));
 			container.add(txtValor);
@@ -228,26 +245,19 @@ public class ReservasView extends JFrame {
 			txtFormaPago.setFont(new Font("Roboto", Font.PLAIN, 16));
 			txtFormaPago.setModel(new DefaultComboBoxModel(new String[] {"Tarjeta de Crédito", "Tarjeta de Débito", "Dinero en efectivo"}));
 			container.add(txtFormaPago);
-			
-			JPanel btnsiguiente = new JPanel();
-			btnsiguiente.setToolTipText("");
-			btnsiguiente.addMouseListener(new MouseAdapter() {
-				@Override
-				public void mouseClicked(MouseEvent e) {
-					if (ReservasView.txtFechaEntrada.getDate() != null && ReservasView.txtFechaSalida.getDate() != null) {		
-						HuespedesFrame registro = new HuespedesFrame();
-						registro.setVisible(true);
-					} else {
-						JOptionPane.showMessageDialog(null, "Debes llenar todos los campos.");
-					}
-				}						
-			});
-			btnsiguiente.setLayout(null);
-			btnsiguiente.setBackground(SystemColor.textHighlight);
-			btnsiguiente.setBounds(188, 486, 122, 35);
-			container.add(btnsiguiente);
-			btnsiguiente.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
+		}
+		
+		private void Guardar() {			
+			
+			
+			var reservas= new Reserva(txtFechaEntrada.getDate(), 
+					txtFechaSalida.getDate(), Double.valueOf(txtValor.getText()),txtFormaPago.getSelectedItem().toString()); 
+			
+			
+			this.reservasController.Agregar(reservas);
+			JOptionPane.showMessageDialog(this, "Registrado con éxito!");
+			
 		}
 		
 		private void headerMousePressed(java.awt.event.MouseEvent e) {

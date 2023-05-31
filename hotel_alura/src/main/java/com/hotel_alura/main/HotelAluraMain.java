@@ -14,9 +14,13 @@ public class HotelAluraMain {
 
 	public static void main(String[] args) {
 		
+		
 		/*HuespedesFrame huespedesFrame =new HuespedesFrame();
-		huespedesFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		huespedesFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);			
 		huespedesFrame.setVisible(true);*/
+		
+		
+		
 		
 		/*ReservasView reservasView =new ReservasView();
 		reservasView.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -25,6 +29,7 @@ public class HotelAluraMain {
 		Login login = new Login();
 		login.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		login.setVisible(true);
+		
 		
 		
 		

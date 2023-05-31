@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 import com.hotel_alura.modelo.Reserva;
+import com.hotel_alura.coneccion.ConeccionBD;
 
 
 public class ReservaDAO {
@@ -14,8 +15,8 @@ public class ReservaDAO {
 	private Connection connection;
 
 	//Constructor
-	public ReservaDAO(Connection connection) {		
-		this.connection = connection;
+	public ReservaDAO(Connection con) {		
+		Connection connection = new ConeccionBD().recuperaConexion();
 	}
 
 	public void Agregar(Reserva reserva) {

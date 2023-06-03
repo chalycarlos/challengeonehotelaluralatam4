@@ -1,13 +1,14 @@
 package com.hotel_alura.modelo;
 
-import java.sql.Date;
+
+import java.util.Date;
 
 public class Reserva {
 	private Integer idreservas;
 	private Date fechaEntrada;	
 	private Date fechaSalida;
 	private Double precio;
-	private String formaPago;
+	private String formaPago,FechaEn,FechaSali;
 	
 	//Constructor
 	public Reserva(int IdReservas,Date fechaEntrada, Date fechaSalida, Double precio, String formaPago) {
@@ -21,11 +22,21 @@ public class Reserva {
 
 	
 
-	public Reserva(java.util.Date fechaEnt, java.util.Date fechaSali, Double precio, String formaPago) {
+	public Reserva(Date fechaEnt, Date fechaSali, Double precio, String formaPago) {
 		this.fechaEntrada = (Date) fechaEnt;
 		this.fechaSalida = (Date) fechaSali;
 		this.precio = precio;
 		this.formaPago = formaPago;
+	}
+
+
+
+	public Reserva(String fecha, String fechaSali, Double valor, String formaPa) {
+		this.FechaEn= fecha;
+		this.FechaSali=fechaSali;
+		this.precio= valor;
+		this.formaPago=formaPa;
+		
 	}
 
 

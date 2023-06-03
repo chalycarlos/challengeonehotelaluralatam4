@@ -50,7 +50,7 @@ public class HuespedesDAO {
 				try(resultSet) {
 					while (resultSet.next()) {
 						huesped.setId(resultSet.getInt(1));
-						System.out.println(String.format("Fue insertado el producto %s", huesped));
+						System.out.println(String.format("Fue insertado el huesped %s", huesped));
 					}
 				}			
 

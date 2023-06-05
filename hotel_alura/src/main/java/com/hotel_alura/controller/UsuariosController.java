@@ -17,6 +17,7 @@ import com.hotel_alura.modelo.Usuarios;
 import com.hotel_alura.views.Login;
 import com.hotel_alura.views.ReservasView;
 import com.hotel_alura.DAO.LoginDao;
+import com.hotel_alura.views.MenuPrincipal;
 import com.hotel_alura.coneccion.ConeccionBD;
 
 public class UsuariosController  {
@@ -26,6 +27,7 @@ public class UsuariosController  {
 	public LoginDao loginDao;
 	private Connection con;
 	private Login login;
+	private MenuPrincipal menu;
 
 	public UsuariosController() {			
 		
@@ -38,11 +40,13 @@ public class UsuariosController  {
 	public void Loguear(String nombre, String contraseña) {
 
 		Usuarios user= new Usuarios(nombre,contraseña);
-		
+		MenuPrincipal menu= new MenuPrincipal();
 		if (LoguearUsuario(user)) {	
+			menu.setVisible(true);
 			
-			ReservasView reserva= new ReservasView();			
-			reserva.setVisible(true);			
+			
+			//ReservasView reserva= new ReservasView();			
+			//reserva.setVisible(true);	
 			
 			
 		}else {

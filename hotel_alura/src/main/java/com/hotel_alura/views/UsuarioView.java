@@ -5,7 +5,7 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 
-public class MenuUsuario extends JFrame {
+public class UsuarioView extends JFrame {
 
 	/**
 	 * Launch the application.
@@ -14,7 +14,7 @@ public class MenuUsuario extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					MenuUsuario frame = new MenuUsuario();
+					UsuarioView frame = new UsuarioView();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -26,7 +26,7 @@ public class MenuUsuario extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public MenuUsuario() {
+	public UsuarioView() {
 		setBounds(100, 100, 450, 300);
 		//setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		

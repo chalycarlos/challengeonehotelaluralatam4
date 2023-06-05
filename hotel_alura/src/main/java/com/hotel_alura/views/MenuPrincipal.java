@@ -1,169 +1,88 @@
 package com.hotel_alura.views;
 
 import java.awt.Color;
-import java.awt.EventQueue;
-import java.awt.Font;
-import java.awt.SystemColor;
-import java.awt.Toolkit;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseMotionAdapter;
+import java.awt.Container;
 
-import javax.swing.ImageIcon;
+
+
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
+
+import javax.swing.JLabel;
 import javax.swing.SwingConstants;
-import javax.swing.border.EmptyBorder;
+import java.awt.Font;
+import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
-public class MenuPrincipal extends JFrame {
 
+public class MenuPrincipal extends JFrame{	
 	private JPanel contentPane;
-	private JLabel labelExit;
-	int xMouse, yMouse;
 	
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					MenuPrincipal frame = new MenuPrincipal();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
-	/**
-	 * Create the frame.
-	 */
-	public MenuPrincipal() {		
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		
-		setIconImage(Toolkit.getDefaultToolkit().getImage(MenuPrincipal.class.getResource("/imagenes/aH-40px.png")));
-		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
-		setBounds(100, 100, 910, 537);
-		contentPane = new JPanel();
-		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		setContentPane(contentPane);
-		contentPane.setLayout(null);
+	
+	
+	public MenuPrincipal() {
+		super("Menu Principal");
+		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setBounds(100,100,600, 429);
 		setResizable(false);
-		setLocationRelativeTo(null);
-		setUndecorated(true);
-
+		Container container = getContentPane();
+		getContentPane().setLayout(null);
 		
 		JPanel panel = new JPanel();
-		panel.setBackground(SystemColor.window);
-		panel.setBounds(0, 0, 910, 537);
-		contentPane.add(panel);
-		panel.setLayout(null);
+		panel.setBackground(new Color(100, 149, 237));
+		panel.setBounds(319, 0, 265, 390);
+		container.add(panel);
 		
-		JLabel imagenFondo = new JLabel("");
-		imagenFondo.setBounds(-50, 0, 732, 501);
-		imagenFondo.setIcon(new ImageIcon(MenuPrincipal.class.getResource("/imagenes/menu-img.png")));
-		panel.add(imagenFondo);
+		JLabel lblTitle = new JLabel("MENU PRINCIPAL");
+		lblTitle.setForeground(new Color(100, 149, 237));
+		lblTitle.setFont(new Font("Tahoma", Font.BOLD, 20));
+		lblTitle.setHorizontalAlignment(SwingConstants.CENTER);
+		lblTitle.setBounds(58, 11, 193, 25);
+		container.add(lblTitle);
 		
-		JLabel Logo = new JLabel("");
-		Logo.setBounds(722, 80, 150, 156);
-		Logo.setIcon(new ImageIcon(MenuPrincipal.class.getResource("/imagenes/aH-150px.png")));
-		panel.add(Logo);
-		
-		JPanel panel_1 = new JPanel();
-		panel_1.setBounds(0, 500, 910, 37);
-		panel_1.setBackground(new Color(12, 138, 199));
-		panel.add(panel_1);
-		panel_1.setLayout(null);
-		
-		JPanel header = new JPanel();
-		header.setBounds(0, 0, 910, 36);
-		header.addMouseMotionListener(new MouseMotionAdapter() {
+		JButton btnReservas = new JButton("RESERVAS");
+		btnReservas.addActionListener(new ActionListener() {
 			@Override
-			public void mouseDragged(MouseEvent e) {
-				headerMouseDragged(e);
-			     
+			public void actionPerformed(ActionEvent e) {
+				ReservasView reserva= new ReservasView();
+				reserva.setVisible(true);
+				//dispose();
 			}
 		});
-		header.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mousePressed(MouseEvent e) {
-				headerMousePressed(e);
-			}
-		});
-		header.setLayout(null);
-		header.setBackground(Color.WHITE);
-		panel.add(header);
+		btnReservas.setForeground(new Color(100, 149, 237));
+		btnReservas.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		btnReservas.setBounds(98, 59, 114, 23);
+		container.add(btnReservas);
 		
-		JPanel btnexit = new JPanel();
-		btnexit.addMouseListener(new MouseAdapter() {
+		JButton btnHuespedes = new JButton("HUESPEDES");
+		btnHuespedes.addActionListener(new ActionListener() {
 			@Override
-			public void mouseClicked(MouseEvent e) {
-				System.exit(0);
-			}
-			@Override
-			public void mouseEntered(MouseEvent e) {
-				btnexit.setBackground(Color.red);
-				labelExit.setForeground(Color.white);
-			}			
-			@Override
-			public void mouseExited(MouseEvent e) {
-				 btnexit.setBackground(Color.white);
-			     labelExit.setForeground(Color.black);
-			}
-		});
-		btnexit.setLayout(null);
-		btnexit.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-		btnexit.setBackground(Color.WHITE);
-		btnexit.setBounds(857, 0, 53, 36);
-		header.add(btnexit);
-		
-		labelExit = new JLabel("X");
-		labelExit.setBounds(0, 0, 53, 36);
-		btnexit.add(labelExit);
-		labelExit.setHorizontalAlignment(SwingConstants.CENTER);
-		labelExit.setFont(new Font("Roboto", Font.PLAIN, 18));
-		
-		JPanel btnLogin = new JPanel();
-		btnLogin.setBounds(754, 300, 83, 70);
-		btnLogin.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				Login login = new Login();
-				login.setVisible(true);
+			public void actionPerformed(ActionEvent e) {
+				HuespedesFrame huespedes= new HuespedesFrame();
+				huespedes.setVisible(true);
 				dispose();
 			}
 		});
-		btnLogin.setLayout(null);
-		btnLogin.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-		btnLogin.setBackground(SystemColor.window);
-		panel.add(btnLogin);
+		btnHuespedes.setForeground(new Color(100, 149, 237));
+		btnHuespedes.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		btnHuespedes.setBounds(99, 103, 113, 23);
+		container.add(btnHuespedes);
 		
-		JLabel lblLogin = new JLabel("");
-		lblLogin.setBounds(0, 0, 80, 70);
-		btnLogin.add(lblLogin);
-		lblLogin.setHorizontalAlignment(SwingConstants.CENTER);
-		lblLogin.setIcon(new ImageIcon(MenuPrincipal.class.getResource("/imagenes/login.png")));
+		JButton btnUsuarios = new JButton("USUARIOS");
+		btnUsuarios.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				UsuarioView usuarioView = new UsuarioView();
+				usuarioView.setVisible(true);
+				dispose();
+			}
+		});
+		btnUsuarios.setForeground(new Color(100, 149, 237));
+		btnUsuarios.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		btnUsuarios.setBounds(99, 150, 113, 23);
+		container.add(btnUsuarios);
 		
-		JLabel lblTitulo = new JLabel("LOGIN");
-		lblTitulo.setBounds(754, 265, 83, 24);
-		lblTitulo.setBackground(SystemColor.window);
-		panel.add(lblTitulo);
-		lblTitulo.setHorizontalAlignment(SwingConstants.CENTER);
-		lblTitulo.setForeground(SystemColor.textHighlight);
-		lblTitulo.setFont(new Font("Roboto Light", Font.PLAIN, 20));
+		
 	}
-	
-	private void headerMousePressed(java.awt.event.MouseEvent evt) {
-        xMouse = evt.getX();
-        yMouse = evt.getY();
-    }//GEN-LAST:event_headerMousePressed
-
-    private void headerMouseDragged(java.awt.event.MouseEvent evt) {
-        int x = evt.getXOnScreen();
-        int y = evt.getYOnScreen();
-        this.setLocation(x - xMouse, y - yMouse);
-
-
-	}
-
 }

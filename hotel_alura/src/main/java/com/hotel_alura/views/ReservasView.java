@@ -183,7 +183,7 @@ public class ReservasView extends JFrame {
 		btnAtras.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				MenuUsuario usuario = new MenuUsuario();
+				UsuarioView usuario = new UsuarioView();
 				usuario.setVisible(true);
 				dispose();				
 			}

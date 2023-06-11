@@ -52,7 +52,7 @@ public class ReservasView extends JFrame {
 	private JLabel lblExit,lblAtras,lblSiguiente;
 	private JPanel panel_1;
 	private JButton btnAtras;
-	private JButton btnGuardar;
+	private JButton btnGuardar, btnMostrar;
 	public  JDateChooser txtFechaSalida;
 	public  JDateChooser txtFechaEntrada;
 	private JComboBox formaPago;
@@ -68,7 +68,7 @@ public class ReservasView extends JFrame {
 		this.reservasController= new ReservasController(null, null);		
 		this.reservaDAO = new ReservaDAO(null, null);
 		
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 910, 560);
 		setResizable(false);
 
@@ -76,6 +76,8 @@ public class ReservasView extends JFrame {
 		getContentPane().setLayout(null);
 
 		configurarCamposDelFormulario(container);
+		
+		
 		accionesDelFormulario();
 
 		setVisible(true);
@@ -88,6 +90,18 @@ public class ReservasView extends JFrame {
 				Agregar();		
 
 			}			
+		});
+		
+		btnMostrar.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				MostrarReservasView mostrarReservasView= new MostrarReservasView();				
+				mostrarReservasView.setVisible(true);
+				dispose();		
+		
+				
+			}
 		});
 
 	}
@@ -206,8 +220,13 @@ public class ReservasView extends JFrame {
 
 		btnGuardar = new JButton("Guardar");			
 		btnGuardar.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		btnGuardar.setBounds(155, 477, 113, 33);
+		btnGuardar.setBounds(98, 477, 113, 33);
 		container.add(btnGuardar);
+		
+		btnMostrar = new JButton("Mostrar");
+		btnMostrar.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		btnMostrar.setBounds(221, 477, 113, 33);
+		container.add(btnMostrar);
 
 		txtFechaSalida = new JDateChooser();
 		txtFechaSalida.setBounds(68, 253, 284, 39);

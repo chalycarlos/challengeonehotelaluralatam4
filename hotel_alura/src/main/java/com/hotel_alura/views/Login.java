@@ -28,7 +28,7 @@ public class Login extends JFrame {
 		
 		this.controller= new UsuariosController();
 		// Configurar la ventana
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100,100,450, 357);
 		setResizable(false);
 		Container container = getContentPane();

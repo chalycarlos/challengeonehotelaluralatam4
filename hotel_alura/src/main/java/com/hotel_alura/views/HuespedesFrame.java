@@ -78,7 +78,7 @@ public class HuespedesFrame extends JFrame {
 		
 		setTitle("Hotel Alura - Reporte de Huéspedes");
         setSize(400, 300);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setLocationRelativeTo(null);        
 		
 		Container container = getContentPane();

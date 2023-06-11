@@ -7,7 +7,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import javax.swing.JOptionPane;
 
@@ -71,6 +73,41 @@ public class ReservaDAO {
 	public void mostrarSuceso() {
 		JOptionPane.showMessageDialog(null, "Reserva guardada exitosamente");
 
+	}
+	
+	public List<Reserva> listar(){
+		List<Reserva> lista= new ArrayList<>();
+		Reserva reserva = null;
+		
+		try {
+			final PreparedStatement statement= con
+					.prepareStatement("SELECT idreservas,fechaEntrada, fechaSalida, precio,formaPago FROM RESERVAS");
+			try(statement) {
+				statement.execute();
+				final ResultSet resultSet= statement.getResultSet();
+				
+				try (resultSet){
+					
+					while (resultSet.next()){
+						int id= resultSet.getInt("idreservas");
+						Date fechaEntrada= resultSet.getDate("fechaEntrada");
+						Date fechaSalida= resultSet.getDate("fechaSalida");
+						Double precio= resultSet.getDouble("precio");
+						String formaPago= resultSet.getString("formaPago");
+						
+						reserva= new Reserva(id,fechaEntrada,fechaSalida,precio,formaPago);
+						lista.add(reserva);
+						
+					}
+					
+				}
+			}		
+			
+			
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		}
+		return lista;
 	}
 
 

@@ -7,6 +7,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
+
 import com.toedter.calendar.JDateChooser;
 
 import com.hotel_alura.DAO.HuespedesDAO;
@@ -40,6 +42,12 @@ public class ReservasController {
 			view.mostrarGuardarFalla();
 		}*/
 		
+	}
+
+
+	public List<Reserva> listar() {
+		
+		return reservaDAO.listar();
 	}
 
 
